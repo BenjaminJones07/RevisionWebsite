@@ -1,0 +1,8 @@
+Database:
+
+questions:
+id INTEGER
+question TEXT
+answers TEXT (; Separated Values)
+ansNo INTEGER (which answer was correct)
+author 

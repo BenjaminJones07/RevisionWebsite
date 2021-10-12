@@ -1,0 +1,4 @@
+CREATE TABLE subjects (id INTEGER, name TEXT, PRIMARY KEY (id));
+CREATE UNIQUE INDEX subj_id ON subjects (name);
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, ansLen INTEGER, author TEXT, subj_id INTEGER, PRIMARY KEY (id), FOREIGN KEY (subj_id) REFERENCES subjects (id));
+CREATE UNIQUE INDEX question_id ON questions (question);
