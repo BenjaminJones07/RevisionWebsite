@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    <h1>{{ question }}</h1>
     <form method="POST" action="/question">
-        <select class="form-select">
-            <option selected>Pick an answer</option>
-            {% set answersList = answers.split(';') %}
-            {% for k, v in answersList.items() %}
-                <option value="{{ k }}">{{ v }}</option>
+        <select class="form-select" name="choice">
+            <option selected disabled>Pick an answer</option>
+            {% for key, answer in answers.items() %}
+                <option value="{{ key }}">{{ answer }}</option>
             {% endfor %}
         </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit answer</button>
     </form>
 {% endblock %}
