@@ -17,9 +17,9 @@ def index():
 @app.route("/question", methods=["GET", "POST"])
 def question():
     if request.method == "GET":
-        max = db.execute("SELECT MAX(id) FROM questions")[0]["MAX(id)"]
-        id = random.choice([x for x in range(1, max+1) if x != session.get("id")])
-        return render_template("question.html", db.execute("SELECT question, answers FROM questions WHERE id = ?", id)[0])
+        max = db.execute("SELECT MAX(id) FROM questions")[0]["MAX(id)"] # Get max ID
+        id = random.choice([x for x in range(1, max+1) if x != session.get("id")]) # Get ID in range not equal to previous ID
+        return render_template("question.html", **db.execute("SELECT id, question, answers FROM questions WHERE id = ?", id)[0]) 
     return "haha post go brrr"
 
 app.run(host="0.0.0.0", port=8080)
