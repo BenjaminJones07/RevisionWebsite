@@ -13,6 +13,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 empty = lambda x: x == "" or not x
+SUBJECTS = ["biology"]
 
 @app.route("/")
 def index():
@@ -21,9 +22,10 @@ def index():
 @app.route("/question", methods=["GET", "POST"])
 def question():
     if request.method == "GET":
-        max = db.execute("SELECT MAX(id) FROM questions")[0]["MAX(id)"] # Get max ID
+        session["subj"] = random.choice([subj for subj in SUBJECTS if subj != session.get("subj")])
+        max = db.execute("SELECT MAX(id) FROM {0}".format(session["subj"]))[0]["MAX(id)"] # Get max ID
         session["id"] = random.choice([x for x in range(1, max+1) if x != session.get("id")]) # Get ID in range not equal to previous ID
-        row = db.execute("SELECT id, question, answers FROM questions WHERE id = ?", session["id"])[0] # Get the random row
+        row = db.execute("SELECT id, question, answers FROM {0}} WHERE id = ?".format(session["subj"]), session["id"])[0] # Get the random row
         answersList = row["answers"].split(';')
         return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(answersList)+1), answersList)))
     
@@ -33,12 +35,14 @@ def question():
     try: choice = int(choice)
     except: return redirect("/question")
     
-    answer = db.execute("SELECT ansNo FROM questions WHERE id = ?", id)[0]["ansNo"]
-    if answer == choice:
-        flash("Correct!", "good")
-        return redirect("/question")
+    row = db.execute("SELECT ansNo, answers, reason FROM {0} WHERE id = ?".format(session["subj"]), id)[0]
+    (answer, answers, reason) = (row["ansNo"], row["answers"], row["reason"])
     
+    if answer == choice: flash("Correct!", "good")
+    else:
+        flashMsg = "Incorrect, the answer was {0}.".format(answers.split(';')[answer-1])
+        flash(flashMsg if reason == None else flashMsg + " {0}".format(reason), "bad")
     
-    flash("Incorrect, the answer was {0}".format())
+    return redirect("/question")
 
 app.run(host="0.0.0.0", port=8080)

@@ -1,3 +1,14 @@
 CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, PRIMARY KEY (id));
 CREATE UNIQUE INDEX question_id ON questions (question);
-& C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.8.exe "c:/Users/User/Documents/Covid Work/Year 9/New folder/RevisionWebsite/write.py"
+DELETE FROM questions WHERE id = 2;
+DELETE FROM questions;
+DROP TABLE questions;
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
+CREATE UNIQUE INDEX question_id ON questions (question);
+UPDATE questions SET question = "Which Of These Elements Don'T Appear In Carbohydrates?" WHERE id = 2;
+UPDATE questions SET question = "Which Of These Elements Don't Appear In Carbohydrates?" WHERE id = 2;
+UPDATE questions SET question = "What word describes the relationship between the shape of an enzyme's active site and the shape of it's corresponding substrate?" WHERE id = 1;
+UPDATE questions SET question = "True or False? Enzymes can work on multiple types of substrate and are not specific to a certain substance." WHERE id = 3;
+DELETE FROM questions;
+DROP TABLE questions;
+CREATE TABLE biology (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));

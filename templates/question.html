@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <h1>{{ question }}</h1>
+    <h3>{{ question }}</h3>
     <form method="POST" action="/question">
-        <select class="form-select" name="choice">
+        <select class="form-select" name="choice" style="font-size: 20px;">
             <option selected disabled>Pick an answer</option>
             {% for key, answer in answers.items() %}
                 <option value="{{ key }}">{{ answer }}</option>

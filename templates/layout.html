@@ -10,7 +10,29 @@
 
         {% block head %}{% endblock %}
     </head>
-    <body class="container bg-secondary" style="text-align: center; padding-top: 5px;">
+    <body class="container bg-secondary" style="text-align: center; margin-top: 30px;">
+        {% with flash = get_flashed_messages(with_categories=true) %}
+            {% if flash %}
+                {% for c, f in flash %}
+                    {% if c == "good" %}
+                        <div class="alert alert-success" role="alert">
+                            {{ f }}
+                        </div>
+                    {% endif %}
+                    {% if c == "bad" %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ f }}
+                        </div>
+                    {% endif %}
+                    {% if c == "error" %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ f }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
