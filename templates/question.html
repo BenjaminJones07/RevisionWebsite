@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    <div style="text-align: right;">
+        {% if session.subj == "biology" %}
+            <h6 style="color: rgb(99, 189, 99)">Biology</h6>
+        {% elif session.subj == "history" %}
+            <h6 style="color: rgb(238, 238, 74)">History</h6>
+        {% endif %}
+    </div>
     <h3>{{ question }}</h3>
     <form method="POST" action="/question">
         <select class="form-select" name="choice" style="font-size: 20px;">

@@ -13,3 +13,5 @@ DELETE FROM questions;
 DROP TABLE questions;
 CREATE TABLE biology (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
 SELECT * FROM biology;
+CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
+CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));

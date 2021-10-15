@@ -11,7 +11,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 Session(app)
 
 empty = lambda x: x == "" or not x
-SUBJECTS = ["biology"]
+SUBJECTS = ["biology", "history"]
 
 @app.route("/")
 def index(): return render_template("index.html")
@@ -21,7 +21,7 @@ def question():
     if request.method == "GET":
         session["subj"] = random.choice([subj for subj in SUBJECTS]) # Select random subject
         max = db.execute("SELECT MAX(id) FROM {0}".format(session["subj"]))[0]['MAX(id)'] # Get max ID
-        session["id"] = random.choice([x for x in range(1, max+1) if x != session["id"]]) # Get ID in range not equal to previous ID
+        session["id"] = random.choice([x for x in range(1, max+1) if x != session.get("id")]) # Get ID in range not equal to previous ID
         row = db.execute("SELECT id, question, answers FROM {0} WHERE id = ?".format(session["subj"]), session["id"])[0] # Get the random row
         return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
     

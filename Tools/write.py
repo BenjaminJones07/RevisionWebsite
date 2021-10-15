@@ -2,7 +2,7 @@ from cs50 import SQL
 import random
 
 db = SQL("sqlite:///revWeb.db")
-SUBJECTS = ["biology"]
+SUBJECTS = ["biology", "history"]
 
 print("Subjects:")
 [print("\t{0}) {1}".format(str(x+1), SUBJECTS[x].title())) for x in range(len(SUBJECTS))]
