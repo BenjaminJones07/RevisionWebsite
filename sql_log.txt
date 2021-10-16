@@ -15,3 +15,4 @@ CREATE TABLE biology (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, re
 SELECT * FROM biology;
 CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
 CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
+INSERT INTO biology (question, answers, ansNo) VALUES ("Which of these elements don't appear in Proteins?", "Carbon;Hydrogen;Oxygen;Nitrogen;None of the above", 5)

@@ -13,13 +13,20 @@ Session(app)
 empty = lambda x: x == "" or not x
 SUBJECTS = ["biology", "history"]
 
-@app.route("/")
-def index(): return render_template("index.html")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
+    if request.method == "GET": return render_template("index.html", subj=SUBJECTS)
+    print(request.form.getlist("subjects"))
+    session["subjects"] = list(dict.fromkeys([x for x in request.form.getlist("subjects") if x in SUBJECTS]))
+    session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
+    return redirect("/")
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
     if request.method == "GET":
-        session["subj"] = random.choice([subj for subj in SUBJECTS]) # Select random subject
+        session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
+        session["subj"] = random.choice([subj for subj in session["subjects"]]) # Select random subject
         max = db.execute("SELECT MAX(id) FROM {0}".format(session["subj"]))[0]['MAX(id)'] # Get max ID
         session["id"] = random.choice([x for x in range(1, max+1) if x != session.get("id")]) # Get ID in range not equal to previous ID
         row = db.execute("SELECT id, question, answers FROM {0} WHERE id = ?".format(session["subj"]), session["id"])[0] # Get the random row
@@ -36,7 +43,7 @@ def question():
     
     if answer == choice: flash("Correct!", "good")
     else:
-        flashMsg = "Incorrect, the answer was {0}.".format(answers.split(';')[answer-1])
+        flashMsg = "Incorrect, the answer was '{0}'.".format(answers.split(';')[answer-1])
         flash(flashMsg if reason == None else "{0} {1}".format(flashMsg, reason), "bad")
     
     return redirect("/question")
