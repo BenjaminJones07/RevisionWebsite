@@ -17,7 +17,6 @@ SUBJECTS = ["biology", "history"]
 def index():
     session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
     if request.method == "GET": return render_template("index.html", subj=SUBJECTS)
-    print(request.form.getlist("subjects"))
     session["subjects"] = list(dict.fromkeys([x for x in request.form.getlist("subjects") if x in SUBJECTS]))
     session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
     return redirect("/")
