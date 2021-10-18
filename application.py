@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, session, flash, redirect
 from flask_session import Session
+from Tools.subjects import SUBJECTS as S
 from cs50 import SQL
 import random
 
-app, db = Flask(__name__), SQL("sqlite:///revWeb.db")
+app, db, SUBJECTS = Flask(__name__), SQL("sqlite:///revWeb.db"), S().getSubjectsArr()
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -11,14 +12,12 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 Session(app)
 
 empty = lambda x: x == "" or not x
-SUBJECTS = ["biology", "history"]
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
     if request.method == "GET": return render_template("index.html", subj=SUBJECTS)
     session["subjects"] = list(dict.fromkeys([x for x in request.form.getlist("subjects") if x in SUBJECTS]))
-    session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"]
     return redirect("/")
 
 @app.route("/question", methods=["GET", "POST"])
@@ -37,13 +36,13 @@ def question():
     try: choice = int(choice) # If choice not int...
     except: return redirect("/question") # ...redirect to question
     
-    row = db.execute("SELECT ansNo, answers, reason FROM {0} WHERE id = ?".format(session["subj"]), id)[0] # 
+    row = db.execute("SELECT ansNo, answers, reason FROM {0} WHERE id = ?".format(session["subj"]), id)[0]
     (answer, answers, reason) = (row["ansNo"], row["answers"], row["reason"])
     
-    if answer == choice: flash("Correct!", "good")
+    if answer == choice: flashMsg, cat = "Correct!", "good"
     else:
-        flashMsg = "Incorrect, the answer was '{0}'.".format(answers.split(';')[answer-1])
-        flash(flashMsg if reason == None else "{0} {1}".format(flashMsg, reason), "bad")
+        flashMsg, cat = "Incorrect, the answer was '{0}'.".format(answers.split(';')[answer-1]), "bad"
+        #flash(flashMsg if reason == None else "{0} {1}".format(flashMsg, reason), "bad")
     
     return redirect("/question")
 

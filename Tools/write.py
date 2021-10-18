@@ -1,8 +1,8 @@
 from cs50 import SQL
 import random
+import subjects
 
-db = SQL("sqlite:///revWeb.db")
-SUBJECTS = ["biology", "history"]
+db, SUBJECTS = SQL("sqlite:///revWeb.db"), subjects.SUBJECTS().getSubjectsArr()
 
 print("Subjects:")
 [print("\t{0}) {1}".format(str(x+1), SUBJECTS[x].title())) for x in range(len(SUBJECTS))]
