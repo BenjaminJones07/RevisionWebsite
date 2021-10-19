@@ -1,8 +1,8 @@
+from Tools.subjects import SUBJECTS as loadSubj
 from cs50 import SQL
 import random
-import subjects
 
-db, SUBJECTS = SQL("sqlite:///revWeb.db"), subjects.SUBJECTS().getSubjectsArr()
+db, SUBJECTS = SQL("sqlite:///revWeb.db"), loadSubj().getSubjectsArr()
 
 print("Subjects:")
 [print("\t{0}) {1}".format(str(x+1), SUBJECTS[x].title())) for x in range(len(SUBJECTS))]

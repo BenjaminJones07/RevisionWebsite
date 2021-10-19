@@ -1,5 +1,5 @@
-import os
 from cs50 import SQL
+import os
 
 database = input("Database file: ")
 if not os.path.isfile(database):
