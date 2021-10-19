@@ -39,11 +39,9 @@ def question():
     row = db.execute("SELECT ansNo, answers, reason FROM {0} WHERE id = ?".format(session["subj"]), id)[0]
     (answer, answers, reason) = (row["ansNo"], row["answers"], row["reason"])
     
-    if answer == choice: flashMsg, cat = "Correct!", "good"
-    else:
-        flashMsg, cat = "Incorrect, the answer was '{0}'.".format(answers.split(';')[answer-1]), "bad"
-        #flash(flashMsg if reason == None else "{0} {1}".format(flashMsg, reason), "bad")
+    flashMsg, cat = ("Correct!", "good") if answer == choice else ("Incorrect, the answer was '{0}'.".format(answers.split(';')[answer-1]), "bad")
     
+    flash(flashMsg if reason == None else "{0} {1}".format(flashMsg, reason), cat)
     return redirect("/question")
 
 app.run(host="0.0.0.0", port=8080)

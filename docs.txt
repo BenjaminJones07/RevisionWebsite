@@ -1,7 +1,14 @@
-Database:
-
+Database Structure:
 {subject}:
 - id INTEGER
 - question TEXT
 - answers TEXT (; Separated Values)
 - ansNo INTEGER (which answer was correct) 1-INDEXED
+
+
+Tools:
+ - addSubj  : Add a subject
+ - sqlite   : Directly run SQL queries
+ - subjects : Simple subject loading file
+ - TorF     : Add a True or False question
+ - write    : Add a multiple-choice question
