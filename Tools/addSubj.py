@@ -1,7 +1,7 @@
+from Tools.subjects import SUBJECTS as loadSubj
 from cs50 import SQL
-import subjects
 
-db, SUBJECTS = SQL("sqlite:///revWeb.db"), subjects.SUBJECTS()
+db, SUBJECTS = SQL("sqlite:///revWeb.db"), loadSubj()
 
 print("Existing subjects:")
 [print("\t- {0}".format(i.title())) for i in SUBJECTS.getSubjectsArr()]

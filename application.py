@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, session, flash, redirect
+from Tools.subjects import SUBJECTS as loadSubj
 from flask_session import Session
-from Tools.subjects import SUBJECTS as S
 from cs50 import SQL
 import random
 
-app, db, SUBJECTS = Flask(__name__), SQL("sqlite:///revWeb.db"), S().getSubjectsArr()
+app, db, SUBJECTS = Flask(__name__), SQL("sqlite:///revWeb.db"), loadSubj().getSubjectsArr()
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
