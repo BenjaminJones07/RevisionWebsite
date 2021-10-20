@@ -1,6 +1,7 @@
 #Imports
 from flask import Flask, render_template, request, session, flash, redirect
 from Tools.subjects import SUBJECTS as loadSubj
+#from Tools.subjects import TOPICS as loadTopic
 from flask_session import Session
 from cs50 import SQL
 import random
@@ -15,19 +16,19 @@ Session(app)
 
 # Helpers
 empty = lambda x: x == "" or not x # Return True if variable is empty
-subjSet = lambda : session["subjects"] = SUBJECTS if not session.get("subjects") else session["subjects"] # If session subjects empty, set to default (all subjects)
+subjSet = lambda : SUBJECTS if not session.get("subjects") else session["subjects"] # If session subjects empty, set to default (all subjects)
 
 # Routes
 @app.route("/", methods=["GET", "POST"])
 def index():
-    subjSet()
+    session["subjects"] = subjSet()
     if request.method == "GET": return render_template("index.html", subj=SUBJECTS) # Render index page
     session["subjects"] = list(dict.fromkeys([x for x in request.form.getlist("subjects") if x in SUBJECTS])) # Remove duplicates and set session
     return redirect("/")
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
-    subjSet()
+    session["subjects"] = subjSet()
     if request.method == "GET":
         session["subj"] = random.choice([subj for subj in session["subjects"]]) # Select random subject
         
