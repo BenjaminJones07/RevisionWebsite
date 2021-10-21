@@ -12,19 +12,22 @@
     <h3>Subjects:</h3>
     <br>
     <form method="POST" action="/">
-        {% for x in subj %}
-            <div class="row checkbox-row">
-                <div class="col-xs-2">
-                    {% if x in session.subjects %}
-                        <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}" checked>
-                    {% else %}
-                        <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}">
-                    {% endif %}
-                    <label class="form-check-label" for="box{{ x | capitalize }}">
-                        {{ x | capitalize }}
-                    </label>
+        {% for k, v in subj.items() %}
+            <h4>{{ k }}</h4>
+            {% for x in v %}
+                <div class="row checkbox-row">
+                    <div class="col-xs-2">
+                        {% if x in session.topics %}
+                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}" checked>
+                        {% else %}
+                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}">
+                        {% endif %}
+                        <label class="form-check-label" for="box{{ x | capitalize }}">
+                            {{ x | capitalize }}
+                        </label>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         {% endfor %}
         <br>
         <button type="submit" class="btn btn-primary">Set Subjects</button>

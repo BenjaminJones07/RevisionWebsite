@@ -1,0 +1,15 @@
+{
+    "subjects": [
+        "biology",
+        "history"
+    ],
+    "topics": {
+        "biology": [
+            "digestion",
+            "photosynthesis"
+        ],
+        "history": [
+            "ww1 causes"
+        ]
+    }
+}
