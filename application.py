@@ -7,7 +7,7 @@ import random
 
 # Config
 subjObj = loadSubj()
-app, db, SUBJECTS, TOPICS = Flask(__name__), SQL("sqlite:///revWeb.db"), subjObj.getSubjectsArr(), subjObj.getFTopicsArr()
+app, db, TOPICS = Flask(__name__), SQL("sqlite:///revWeb.db"), subjObj.getFTopicsArr()
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -17,25 +17,21 @@ Session(app)
 # Helpers
 empty = lambda x: x == "" or not x # Return True if variable is empty
 #subjSet = lambda : SUBJECTS if not session.get("subjects") else session["subjects"] # If session subjects empty, set to default (all subjects)
-topicSet = lambda : TOPICS #if not session.get("topics") else session["topics"] # If session topics empty, set to default (all topics)
+topicSet = lambda : TOPICS if not session.get("topics") else session["topics"] # If session topics empty, set to default (all topics)
 
 # Routes
 @app.route("/", methods=["GET", "POST"])
 def index():
     session["topics"] = topicSet()
     if request.method == "GET": return render_template("index.html", subj=subjObj.getRawTopicsArr()) # Render index page
-    session["subjects"] = list(dict.fromkeys([x for x in request.form.getlist("subjects") if x in SUBJECTS])) # Remove duplicates and set session
+    session["topics"] = list(dict.fromkeys([x for x in request.form.getlist("topics") if x in TOPICS])) # Remove duplicates and set session
     return redirect("/")
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
     session["topics"] = topicSet()
     if request.method == "GET":
-        print(session["id"])
-        top, rand = session["topics"], random.choice(session["topics"])
-        print(top, rand)
-        print(db.execute("SELECT id, question, answers, subj FROM questions WHERE topic = ? AND id != ?", rand, session.get("id")))
-        row = random.choice(db.execute("SELECT id, question, answers, subj FROM questions WHERE topic = ? AND id != ?", rand, session.get("id"))) # Get random row
+        row = random.choice(db.execute("SELECT id, question, answers, subj FROM questions WHERE topic = ? AND id != ?", random.choice(session["topics"]), session.get("id", 0))) # Get random row
         session["id"], session["subject"] = row["id"], row["subj"]
         
         return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template

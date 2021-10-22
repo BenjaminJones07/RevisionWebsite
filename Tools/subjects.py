@@ -1,7 +1,7 @@
 import json
 class SUBJECTS():
     def __init__(self, file="config/data.json"):
-            self.file, self.data = file, json.load(open(file))
+        self.file, self.data = file, json.load(open(file))
 
     save = lambda self: json.dump(self.data, open(self.file, "w"), indent=4)
 
@@ -12,14 +12,14 @@ class SUBJECTS():
     getSubjTopicArr = lambda self, subject: self.data["topics"].get(subject)
     def getSubjByTopic(self, topic):
         for x in self.getSubjectsArr():
-            if topic in getSubjTopicArr(x):
+            if topic in self.getSubjTopicArr(x):
                 return x
         return None
 
     # In methods
-    isTopicInSubjects = lambda self, topic, subjects: True in [topic in self.data["topics"].get(x) for x in subjects]
+    isTopicInSubjects = lambda self, topic, subjects: True in [(topic in self.data["topics"].get(x, [])) for x in subjects]
     inSubjects = lambda self, subject: subject in self.data["subjects"]
-    inTopics = lambda self, topic: topic in [self.getSubjTopicArr(x) for x in self.getSubjectsArr()]
+    inTopics = lambda self, topic: topic in sum([self.getSubjTopicArr(x) for x in self.getSubjectsArr()], [])
 
     # Add methods
     def addSubj(self, subject):
@@ -28,10 +28,23 @@ class SUBJECTS():
             self.data["topics"][subject] = []
             self.save()
 
-    def addTopic (self, topic, subject):
+    def addTopic(self, topic, subject):
         if self.inSubjects(subject):
-            self.data["topics"][subject] = [topic]
+            self.data["topics"][subject].append(topic)
             self.save()
+            
+def subjectsListInput(subjObj=SUBJECTS()): # List subjects and get user input
+    subjs = subjObj.getSubjectsArr()
+    print("Subjects:")
+    [print("\t{0} ) {1}".format(str(x+1), subjs[x].title())) for x in range(len(subjs))]
+    return subjs[int(input("Question subject number: "))-1]
+
+def subjAndTopicListInput(subjObj=SUBJECTS()): # List subjects and topics and get user inputs
+    subj = subjectsListInput(subjObj)
+    topics = subjObj.getSubjTopicArr(subj)
+    print("{0} topics:".format(subj.title()))
+    [print("\t{0} ) {1}".format(str(x+1), topics[x].title())) for x in range(len(topics))]
+    return (subj, topics[int(input("Question topic number: "))-1])
 
 """
 test = SUBJECTS()

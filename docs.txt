@@ -1,10 +1,11 @@
 Database Structure:
-{subject}:
-- id INTEGER
-- question TEXT
-- answers TEXT (; Separated Values)
-- ansNo INTEGER (which answer was correct) 1-INDEXED
-
+questions:
+ - id INTEGER
+ - question TEXT
+ - answers TEXT (; Separated Values)
+ - ansNo INTEGER (which answer was correct) 1-INDEXED
+ - subj TEXT
+ - topic TEXT
 
 Tools:
  - addSubj  : Add a subject

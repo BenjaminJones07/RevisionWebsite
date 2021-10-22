@@ -32,3 +32,11 @@ SELECT * FROM questions WHERE topic = "ww1 causes"
 UPDATE questions SET topic = "ww1" WHERE id in (17, 18)
 SELECT * FROM questions WHERE topic = "ww1 causes"
 SELECT * FROM questions;
+SELECT * FROM questions WHERE question LIKE "%'%"
+SELECT * FROM questions WHERE answers LIKE "%'%"
+UPDATE questions SET answers = "You Must;You Shouldn't;You Can" WHERE id = 23
+SELECT * FROM questions WHERE answers LIKE "%'%"
+UPDATE questions SET answers = "You Could;You Shouldn't;You Must Not" WHERE id = 27
+SELECT * FROM questions WHERE answers LIKE "%'%"
+& C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.8.exe "c:/Users/User/Documents/Covid Work/Year 9/New folder/RevisionWebsite/application.py"
+UPDATE questions SET topic = "world war 1" WHERE topic = "ww1"

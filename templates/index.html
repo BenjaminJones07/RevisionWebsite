@@ -9,27 +9,26 @@
     </form>
     <br>
     <hr>
-    <h3>Subjects:</h3>
+    <h3>Topics:</h3>
     <br>
-    <form method="POST" action="/">
+    <form method="POST" action="/" style="text-align: left;">
         {% for k, v in subj.items() %}
-            <h4>{{ k }}</h4>
+            <h5>{{ k | capitalize }}</h5>
             {% for x in v %}
-                <div class="row checkbox-row">
-                    <div class="col-xs-2">
-                        {% if x in session.topics %}
-                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}" checked>
-                        {% else %}
-                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="subjects" id="box{{ x | capitalize }}">
-                        {% endif %}
-                        <label class="form-check-label" for="box{{ x | capitalize }}">
-                            {{ x | capitalize }}
-                        </label>
-                    </div>
+                <div class="form-check-inline">
+                    {% if x in session.topics %}
+                        <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}" checked>
+                    {% else %}
+                        <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}">
+                    {% endif %}
+                    <label class="form-check-label" for="box{{ x | capitalize }}">
+                        {{ x | capitalize }}
+                    </label>
                 </div>
             {% endfor %}
+            <br><br>
         {% endfor %}
         <br>
-        <button type="submit" class="btn btn-primary">Set Subjects</button>
+        <button type="submit" class="btn btn-primary">Set Topics</button>
     </form>
 {% endblock %}
