@@ -16,3 +16,19 @@ SELECT * FROM biology;
 CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
 CREATE TABLE history (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));
 INSERT INTO biology (question, answers, ansNo) VALUES ("Which of these elements don't appear in Proteins?", "Carbon;Hydrogen;Oxygen;Nitrogen;None of the above", 5)
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, topic TEXT, PRIMARY KEY (id));
+DROP TABLE questions;
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, subj TEXT, topic TEXT, PRIMARY KEY (id));
+DROP TABLE questions;
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, subj TEXT, topic TEXT, PRIMARY KEY (id));
+DROP TABLE questions;
+CREATE TABLE questions (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, subj TEXT, topic TEXT, PRIMARY KEY (id));
+SELECT * FROM questions;
+SELECT * FROM biology
+SELECT * FROM history
+SELECT * FROM french
+SELECT * FROM questions;
+SELECT * FROM questions WHERE topic = "ww1 causes"
+UPDATE questions SET topic = "ww1" WHERE id in (17, 18)
+SELECT * FROM questions WHERE topic = "ww1 causes"
+SELECT * FROM questions;

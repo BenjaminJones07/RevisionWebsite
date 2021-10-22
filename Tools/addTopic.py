@@ -1,15 +1,21 @@
+from json import loads
 from subjects import SUBJECTS as loadSubj
 from cs50 import SQL
 
-db, SUBJECTS = SQL("sqlite:///revWeb.db"), loadSubj()
+SUBJECTS = loadSubj()
+sArr = SUBJECTS.getSubjectsArr() # Add this in below!!!
 
-print("Existing topics:")
-[print("\t- {0}".format(i.title())) for i in SUBJECTS.getSubjectsArr()]
-subjName = input("New subject name: ").strip().lower()
-if SUBJECTS.inSubjects(subjName):
+print("Existing Subjects and topics:")
+[[print("\t{0} - {1}".format(s.title(), t.title())) for t in SUBJECTS.getSubjTopicArr(s)]for s in SUBJECTS.getSubjectsArr()]
+print("Existing Subjects:")
+[print("\t {0}) {1}".format(i, SUBJECTS.getSubjects.Arr()[i].title())) for i in range(len(SUBJECTS.getSubjectsArr()))]
+try: subjId = int(input("Topic's subject: "))
+except: (print("Not a number"), exit())
+if not SUBJECTS.inSubjects(SUBJECTS.getSubjectArr()[subjId])
+topicName = input("New topic name: ").strip().lower()
+if SUBJECTS.isTopicInSubjects(topicName, ):
     print("Subject already exists")
     exit()
 
-db.execute("CREATE TABLE {0} (id INTEGER, question TEXT, answers TEXT, ansNo INTEGER, reason TEXT, PRIMARY KEY (id));".format(subjName))
-SUBJECTS.addSubject(subjName)
-print("Subject added!")
+SUBJECTS.addTopic(topicName, subjId)
+print("Topic added!")

@@ -1,15 +1,18 @@
 {
     "subjects": [
         "biology",
-        "history"
+        "history",
+        "french"
     ],
     "topics": {
         "biology": [
-            "digestion",
-            "photosynthesis"
+            "digestion"
         ],
         "history": [
-            "ww1 causes"
+            "ww1"
+        ],
+        "french": [
+            "verbs"
         ]
     }
 }

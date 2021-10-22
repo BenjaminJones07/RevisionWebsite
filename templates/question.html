@@ -2,10 +2,12 @@
 
 {% block body %}
     <div style="text-align: right;">
-        {% if session.subj == "biology" %}
+        {% if session.subject == "biology" %}
             <h6 style="color: rgb(99, 189, 99)">Biology</h6>
-        {% elif session.subj == "history" %}
+        {% elif session.subject == "history" %}
             <h6 style="color: rgb(238, 238, 74)">History</h6>
+        {% elif session.subject == "french" %}
+            <h6 style="color: rgb(67, 116, 221)">French</h6>
         {% endif %}
     </div>
     <h3>{{ question }}</h3>
