@@ -27,11 +27,15 @@ class SUBJECTS():
             self.data["subjects"].append(subject)
             self.data["topics"][subject] = []
             self.save()
+        else: print("Subject already exists")
 
-    def addTopic(self, topic, subject):
+    addTopic = lambda self, topic, subject: (self.data["topics"][subject].append(topic), self.save()) if self.inSubjects(subject) else print("Subject does not exist")
+
+    """def addTopic(self, topic, subject):
         if self.inSubjects(subject):
             self.data["topics"][subject].append(topic)
             self.save()
+        else: print("Subject does not exist")"""
             
 def subjectsListInput(subjObj=SUBJECTS()): # List subjects and get user input
     subjs = subjObj.getSubjectsArr()

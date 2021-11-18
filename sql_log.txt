@@ -40,3 +40,60 @@ UPDATE questions SET answers = "You Could;You Shouldn't;You Must Not" WHERE id =
 SELECT * FROM questions WHERE answers LIKE "%'%"
 & C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.8.exe "c:/Users/User/Documents/Covid Work/Year 9/New folder/RevisionWebsite/application.py"
 UPDATE questions SET topic = "world war 1" WHERE topic = "ww1"
+SELECT * FROM questions;
+SELECT * FROM questions WHERE id = 1;
+SELECT * FROM questions WHERE id = 2;
+SELECT * FROM questions WHERE id = 3;
+SELECT * FROM questions WHERE id = 4
+UPDATE questions SET answers = 'Active site;Binding site;Breaking site' WHERE id = 4
+SELECT * FROM questions WHERE id = 4
+SELECT * FROM questions WHERE id = 5
+SELECT * FROM questions WHERE id = 6
+SELECT * FROM questions WHERE id = 7
+SELECT * FROM questions WHERE id = 8
+SELECT * FROM questions WHERE id = 9
+SELECT * FROM questions WHERE id = 10
+SELECT * FROM questions WHERE id = 11
+UPDATE questions SET answers = 'Growth and repair;Generating energy;Insulation' WHERE id = 11
+SELECT * FROM questions WHERE id = 11
+SELECT * FROM questions WHERE id = 12
+SELECT * FROM questions WHERE id = 13
+SELECT * FROM questions WHERE id = 14
+SELECT * FROM questions WHERE id = 15
+SELECT * FROM questions WHERE id = 15
+SELECT * FROM questions WHERE id = 16
+SELECT * FROM questions WHERE id = 16
+SELECT * FROM questions WHERE id = 17
+SELECT * FROM questions WHERE id = 18
+SELECT * FROM questions WHERE id = 19
+SELECT * FROM questions WHERE id = 20
+UPDATE questions SET answers = 'When Germany invaded Belgium;When Franz Ferdinand was assassinated;When Germany declared war on Russia' WHERE id = 20
+SELECT * FROM questions WHERE id = 20
+SELECT * FROM questions WHERE id = 21
+SELECT * FROM questions WHERE id = 22
+SELECT * FROM questions WHERE id = 23
+UPDATE questions SET answers = 'You must;You shouldn't;You can' WHERE id = 23
+UPDATE questions SET answers = 'You must;You shouldn't;You can' WHERE id = 23
+SELECT * FROM questions WHERE id = 23
+UPDATE questions SET answers = 'You must;You shouldn\'t;You can' WHERE id = 23
+UPDATE questions SET answers = "You must;You shouldn't;You can" WHERE id = 23
+SELECT * FROM questions WHERE id = 23
+SELECT * FROM questions WHERE id = 24
+UPDATE questions SET answers = "To be;To have;To go" WHERE id = 24
+SELECT * FROM questions WHERE id = 24
+SELECT * FROM questions WHERE id = 25
+UPDATE questions SET answers = "To have;To go;To be" WHERE id = 25
+SELECT * FROM questions WHERE id = 25
+SELECT * FROM questions WHERE id = 26
+SELECT * FROM questions WHERE id = 27
+UPDATE questions SET answers = "You could;You shouldn't;You must not" WHERE id = 27
+SELECT * FROM questions WHERE id = 27
+SELECT * FROM questions WHERE id = 28
+UPDATE questions SET answers = "The Direction of Vibration is parallel to the Direction of Propagation;The Direction of Vibration is perpendicular to the Direction of Propagation" WHERE id = 28
+SELECT * FROM questions WHERE id = 28
+SELECT * FROM questions WHERE id = 29
+UPDATE questions SET answers = "The Direction of Vibration is perpendicular to the Direction of Propagation;The Direction of Vibration is parallel to the Direction of Propagation" WHERE id = 29
+SELECT * FROM questions WHERE id = 29
+SELECT * FROM questions WHERE id = 30
+UPDATE questions SET answers = "Hz;s;m" WHERE id = 30
+SELECT * FROM questions WHERE id = 31

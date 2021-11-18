@@ -5,9 +5,9 @@ import random
 db, (subj, topic) = SQL("sqlite:///revWeb.db"), subjAndTopicListInput()
 
 question = input("Question: ")
-answers = [input("Incorrect answer " + str(x + 1) + ": ").title() for x in range(int(input("No. of answers: "))-1)]
+answers = [input("Incorrect answer " + str(x + 1) + ": ") for x in range(int(input("No. of answers: "))-1)]
 random.shuffle(answers)
-corrAns = input("Correct Answer: ").title()
+corrAns = input("Correct Answer: ")
 reason = input("Reason (optional): ")
 rand = random.randint(0, len(answers))
 answers.insert(rand, corrAns)

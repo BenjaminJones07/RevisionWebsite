@@ -35,9 +35,8 @@ def question():
         session["id"], session["subject"] = row["id"], row["subj"]
         
         return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
-    
-    id, choice = session.get("id"), request.form.get("choice") # Get form params
-    if empty(id) or empty(choice): # Check that choice and id exist, therefore also proving subj exists
+
+    if empty(id := session.get("id")) or empty(choice := request.form.get("choice")): # Check that choice and id exist, therefore also proving subj exists
         flash("No answer supplied", "warn")
         return redirect("/question") 
     

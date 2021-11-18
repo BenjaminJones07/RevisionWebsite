@@ -9,5 +9,5 @@ if SUBJECTS.inSubjects(subjName):
     print("Subject already exists")
     exit()
 
-SUBJECTS.addSubject(subjName)
+SUBJECTS.addSubj(subjName)
 print("Subject added!")

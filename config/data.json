@@ -2,7 +2,10 @@
     "subjects": [
         "biology",
         "history",
-        "french"
+        "french",
+        "maths",
+        "music",
+        "physics"
     ],
     "topics": {
         "biology": [
@@ -14,6 +17,13 @@
         "french": [
             "verbs",
             "phrases"
+        ],
+        "maths": [
+            "factorising"
+        ],
+        "music": [],
+        "physics": [
+            "waves"
         ]
     }
 }
