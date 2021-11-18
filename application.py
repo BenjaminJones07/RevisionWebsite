@@ -1,4 +1,4 @@
-#Imports
+# Imports
 from flask import Flask, render_template, request, session, flash, redirect
 from Tools.subjects import SUBJECTS as loadSubj
 from flask_session import Session
