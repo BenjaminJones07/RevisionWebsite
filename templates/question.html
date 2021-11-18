@@ -12,12 +12,7 @@
     </div>
     <h3>{{ question }}</h3>
     <form method="POST" action="/question">
-        <select class="form-select" name="choice" style="font-size: 20px;">
-            <option selected disabled>Pick an answer</option>
-            {% for key, answer in answers.items() %}
-                <option value="{{ key }}">{{ answer }}</option>
-            {% endfor %}
-        </select>
+        {% block questionHTML %}{% endblock %}
         <br>
         <button type="submit" class="btn btn-primary">Submit answer</button>
     </form>

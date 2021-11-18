@@ -34,7 +34,8 @@ def question():
         row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session["topics"]), session.get("id", 0))) # Get random row
         session["id"], session["subject"] = row["id"], row["subj"]
         
-        return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
+        if row["type"] == 0: return render_template("multichoice.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
+        if row["type"] == 1: return render_template("openanswer.html", question=row["question"], postlude=row["answers"])
 
     if empty(id := session.get("id")) or empty(choice := request.form.get("choice")): # Check that choice and id exist, therefore also proving subj exists
         flash("No answer supplied", "warn")

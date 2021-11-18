@@ -1,4 +1,5 @@
 import json
+
 class SUBJECTS():
     def __init__(self, file="config/data.json"):
         self.file, self.data = file, json.load(open(file))
@@ -50,13 +51,12 @@ def subjAndTopicListInput(subjObj=SUBJECTS()): # List subjects and topics and ge
     [print("\t{0} ) {1}".format(str(x+1), topics[x].title())) for x in range(len(topics))]
     return (subj, topics[int(input("Question topic number: "))-1])
 
-"""
-test = SUBJECTS()
-print(test.getTopicsArr())
-print(test.getSubjectsArr())
-print(test.getSubjTopicArr("biology"))
-print(test.isTopicInSubjects("ww1 causes", ["history", "biology"]))
-test.addSubj("test")
-print(test.getSubjectsArr())
-print(test.getTopicsArr())
-"""
+# Non subject related functions and variables
+
+questionTypes = ["Multiple Choice", "Open Answer"]
+
+def typeListInput(): # List question types and get user input
+    (print("Question types:"), [print("\t{0} ) {1}".format(str(x+1), questionTypes[x].title())) for x in range(len(questionTypes))])
+    return ((x := int(input("Question type number: "))-1), questionTypes[x])
+
+# More work on prelude for open answer questions and on generalizing systems in general

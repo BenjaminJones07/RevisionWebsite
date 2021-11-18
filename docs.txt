@@ -2,10 +2,11 @@ Database Structure:
 questions:
  - id INTEGER
  - question TEXT
- - answers TEXT (; Separated Values)
+ - answers TEXT (; Separated Values for type = 0, postlude for type = 1)
  - ansNo INTEGER (which answer was correct) 1-INDEXED
  - subj TEXT
  - topic TEXT
+ - type INTEGER
 
 Tools:
  - addSubj  : Add a subject
@@ -13,3 +14,7 @@ Tools:
  - subjects : Simple subject loading file
  - TorF     : Add a True or False question
  - write    : Add a multiple-choice question
+
+Types:
+ - 0 : Multiple choice
+ - 1 : Open answer (with postlude)
