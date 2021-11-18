@@ -7,7 +7,7 @@ sArr = SUBJECTS.getSubjectsArr()
 
 # Subjects and Topics list
 print("Existing Subjects and topics:")
-[[print("\t{0} - {1}".format(s.title(), t.title())) for t in SUBJECTS.getSubjTopicArr(s)]for s in sArr]
+[print("\t{0} - {1}".format(s.title(), ', '.join([t.title() for t in SUBJECTS.getSubjTopicArr(s)]))) for s in sArr]
 
 # Subjects and IDs
 print("Existing Subjects:")

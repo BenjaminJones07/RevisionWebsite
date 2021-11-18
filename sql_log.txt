@@ -97,3 +97,11 @@ SELECT * FROM questions WHERE id = 30
 UPDATE questions SET answers = "Hz;s;m" WHERE id = 30
 SELECT * FROM questions WHERE id = 31
 SELECT * FROM questions WHERE id = 1;
+SELECT * FROM questions WHERE id = 1;
+& C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.8.exe "c:/Users/User/Documents/Covid Work/Year 9/New folder/RevisionWebsite/tmpTools/addColumnToTable.py"
+UPDATE questions SET type = 0 WHERE type = 1;
+& C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.8.exe "c:/Users/User/Documents/Covid Work/Year 9/New folder/RevisionWebsite/Tools/showQuestions.py"
+SELECT * FROM questions WHERE subj="Physics";
+SELECT * FROM questions WHERE subj="physics";
+UPDATE questions SET type = 0 WHERE id = 33;
+DELETE FROM questions WHERE id = 33;

@@ -31,7 +31,7 @@ def index():
 def question():
     session["topics"] = topicSet()
     if request.method == "GET":
-        row = random.choice(db.execute("SELECT id, question, answers, subj FROM questions WHERE topic = ? AND id != ?", random.choice(session["topics"]), session.get("id", 0))) # Get random row
+        row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session["topics"]), session.get("id", 0))) # Get random row
         session["id"], session["subject"] = row["id"], row["subj"]
         
         return render_template("question.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template

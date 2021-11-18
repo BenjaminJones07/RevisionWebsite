@@ -23,7 +23,8 @@
         ],
         "music": [],
         "physics": [
-            "waves"
+            "waves",
+            "energy"
         ]
     }
 }
