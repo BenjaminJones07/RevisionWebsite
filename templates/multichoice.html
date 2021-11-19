@@ -1,6 +1,6 @@
 {% extends "question.html" %}
 
-{% block question %}
+{% block questionHTML %}
     <select class="form-select" name="choice" style="font-size: 20px;">
         <option selected disabled>Pick an answer</option>
         {% for key, answer in answers.items() %}

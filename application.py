@@ -16,7 +16,6 @@ Session(app)
 
 # Helpers
 empty = lambda x: x == "" or not x # Return True if variable is empty
-#subjSet = lambda : SUBJECTS if not session.get("subjects") else session["subjects"] # If session subjects empty, set to default (all subjects)
 topicSet = lambda : TOPICS if not session.get("topics") else session["topics"] # If session topics empty, set to default (all topics)
 
 # Routes
