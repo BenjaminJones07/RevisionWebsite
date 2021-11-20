@@ -1,6 +1,7 @@
 # Imports
 from flask import Flask, render_template, request, session, flash, redirect
 from Tools.subjects import SUBJECTS as loadSubj
+from Tools.questions import questionFuncts as qF, answerFuncts as aF
 from flask_session import Session
 from cs50 import SQL
 import random
@@ -34,20 +35,15 @@ def question():
         session["id"], session["subject"] = row["id"], row["subj"]
         
         if row["type"] == 0: return render_template("multichoice.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
-        if row["type"] == 1: return render_template("openanswer.html", question=row["question"], postlude=row["answers"])
+        if row["type"] == 1: return render_template("openanswer.html", question=row["question"], postlude=row["answers"].split(';')[1])
 
     if empty(id := session.get("id")) or empty(choice := request.form.get("choice")): # Check that choice and id exist, therefore also proving subj exists
         flash("No answer supplied", "warn")
-        return redirect("/question") 
-    
-    try: choice = int(choice) # If choice not int...
-    except: # ...redirect to question
-        flash("NaN", "warn")
         return redirect("/question")
     
-    row = db.execute("SELECT ansNo, answers, reason FROM questions WHERE id = ?", id)[0] # Get question row
-    
-    flashMsg, cat = ("Correct!", "good") if row["ansNo"] == choice else ("Incorrect, the answer was '{0}'.".format(row["answers"].split(';')[row["ansNo"]-1]), "bad") # Correct or incorrect
+    row = db.execute("SELECT ansNo, answers, reason, type FROM questions WHERE id = ?", id)[0] # Get question row
+
+    flashMsg, cat = ("Correct!", "good") if qF[row["type"]](row, choice) else ("Incorrect, the answer was {0}.".format(aF[row["type"]](row)), "bad") # Correct or incorrect
     flash(flashMsg if row["reason"] == None else "{0} {1}".format(flashMsg, row["reason"]), cat) # Flash message
     
     return redirect("/question") # Get new question

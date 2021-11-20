@@ -50,13 +50,3 @@ def subjAndTopicListInput(subjObj=SUBJECTS()): # List subjects and topics and ge
     print("{0} topics:".format(subj.title()))
     [print("\t{0} ) {1}".format(str(x+1), topics[x].title())) for x in range(len(topics))]
     return (subj, topics[int(input("Question topic number: "))-1])
-
-# Non subject related functions and variables
-
-questionTypes = ["Multiple Choice", "Open Answer"]
-
-def typeListInput(): # List question types and get user input
-    (print("Question types:"), [print("\t{0} ) {1}".format(str(x+1), questionTypes[x].title())) for x in range(len(questionTypes))])
-    return ((x := int(input("Question type number: "))-1), questionTypes[x])
-
-# More work on prelude for open answer questions and on generalizing systems in general

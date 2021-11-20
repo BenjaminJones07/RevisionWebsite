@@ -2,7 +2,7 @@ Database Structure:
 questions:
  - id INTEGER
  - question TEXT
- - answers TEXT (; Separated Values for type = 0, postlude for type = 1)
+ - answers TEXT (; Separated Value)
  - ansNo INTEGER (which answer was correct) 1-INDEXED
  - subj TEXT
  - topic TEXT

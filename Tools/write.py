@@ -5,7 +5,7 @@ import random
 db, (subj, topic), (qType, _)  = SQL("sqlite:///revWeb.db"), subjAndTopicListInput(), typeListInput()
 
 question = input("Question: ")
-if qType == 1: answers = ';'.join([input("Correct answer: "), input("Correct answer: ")])
+if qType == 1: (answers := [input("Correct answer: "), input("Postlude: ")], rand := 0)
 else:
     random.shuffle((answers := [input("Incorrect answer " + str(x + 1) + ": ") for x in range(int(input("No. of answers: "))-1)]))
     answers.insert((rand := random.randint(0, len(answers))), (corrAns := input("Correct Answer: ")))

@@ -11,3 +11,10 @@ A general revision website for use in Year 9 subjects
 #### French:
  - Verbs
  - Phrases
+
+#### Maths:
+ - Simple Factorising
+
+#### Physics:
+ - Waves
+ - Energy

@@ -4,7 +4,6 @@
         "history",
         "french",
         "maths",
-        "music",
         "physics"
     ],
     "topics": {
@@ -19,9 +18,8 @@
             "phrases"
         ],
         "maths": [
-            "factorising"
+            "simple factorising"
         ],
-        "music": [],
         "physics": [
             "waves",
             "energy"
