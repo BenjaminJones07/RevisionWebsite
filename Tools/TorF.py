@@ -1,7 +1,7 @@
-from subjects import subjAndTopicListInput, typeListInput
+from subjects import subjAndTopicListInput
 from cs50 import SQL
 
-db, (subj, topic), (qType, _) = SQL("sqlite:///revWeb.db"), subjAndTopicListInput(), typeListInput()
+db, (subj, topic) = SQL("sqlite:///revWeb.db"), subjAndTopicListInput()
 
 # Inputs
 question = "True or False? {0}".format(input("Statement: "))

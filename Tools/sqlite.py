@@ -8,6 +8,7 @@ db = SQL("sqlite:///{0}".format(database))
 
 while True:
     cmd = input("{0}> ".format(database))
+    if cmd[0] == "&": continue
     try:
         print(db.execute(cmd))
     except Exception as e:

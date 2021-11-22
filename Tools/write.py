@@ -1,4 +1,5 @@
-from subjects import subjAndTopicListInput, typeListInput
+from subjects import subjAndTopicListInput
+from questions import typeListInput
 from cs50 import SQL
 import random
 

@@ -8,6 +8,8 @@
             <h6 style="color: rgb(238, 238, 74)">History</h6>
         {% elif session.subject == "french" %}
             <h6 style="color: rgb(67, 116, 221)">French</h6>
+        {% else %}
+            <h6>{{ session.subject | capitalize }}</h6>
         {% endif %}
     </div>
     <h3>{{ question }}</h3>
