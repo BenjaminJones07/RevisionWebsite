@@ -3,8 +3,10 @@
 {% block questionHTML %}
     <div class="input-group">
         <input type="text" class="form-control" name="choice" autocomplete="off" placeholder="Answer here" aria-describedby="postlude-span">
-        <div class="input-group-append">
-            <span class="input-group-text" id="postlude-span">{{ postlude }}</span>
-        </div>
+        {% if postlude %}
+            <div class="input-group-append">
+                <span class="input-group-text" id="postlude-span">{{ postlude }}</span>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
