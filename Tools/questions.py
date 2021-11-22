@@ -12,7 +12,7 @@ multiChoiceAns = lambda row: "\'" + row["answers"].split(';')[row["ansNo"]-1] +"
 
 # Open Answer
 
-openAnswer = lambda row, choice: row["answers"].split(';')[0] == choice
+openAnswer = lambda row, choice: row["answers"].split(';')[0].replace(' ', '') == choice.replace(' ', '')
 openAnswerAns = lambda row: ''.join(row["answers"].split(';'))
 
 questionTypes = ["Multiple Choice", "Open Answer"]
