@@ -1,4 +1,4 @@
-from flask import flash, redirect
+from flask import flash
 
 # Multiple Choice
 def multiChoice(row, choice):
