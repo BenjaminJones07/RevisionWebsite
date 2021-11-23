@@ -120,3 +120,4 @@ SELECT question FROM questions WHERE id = 19;
 SELECT id FROM questions WHERE reason LIKE "%Belgian%"
 SELECT reason FROM questions WHERE id = 19;
 UPDATE questions SET reason = 'The German army was held back by the Belgian army who flooded a large part of Belgium. Russia also mobilised much faster than Germany expected due to help from France.' WHERE id = 19;
+SELECT * FROM questions;
