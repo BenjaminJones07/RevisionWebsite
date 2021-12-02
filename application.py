@@ -27,6 +27,16 @@ def index():
     session["topics"] = list(dict.fromkeys([x for x in request.form.getlist("topics") if x in TOPICS])) # Remove duplicates and set session
     return redirect("/")
 
+@app.route("/factSearch")
+def factsearch():
+    return "nice"
+
+@app.route("/factFile")
+def factfile():
+    if not (id := request.args.get("id")): return redirect("/factSearch")
+    if id < int(db.execute("SELECT MAX(id) FROM facts;")[0]): return "Bad ID"
+    return "Nice"
+
 @app.route("/question", methods=["GET", "POST"])
 def question():
     session["topics"] = topicSet()
