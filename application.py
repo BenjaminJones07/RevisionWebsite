@@ -28,14 +28,16 @@ def index():
     return redirect("/")
 
 @app.route("/factSearch")
-def factsearch():
-    return "nice"
+def factsearch(): # Browse fact files
+    return "Nice"
 
 @app.route("/factFile")
-def factfile():
-    if not (id := request.args.get("id")): return redirect("/factSearch")
-    if id < int(db.execute("SELECT MAX(id) FROM facts;")[0]): return "Bad ID"
-    return "Nice"
+def factfile(): # Display fact file
+    if not (id := request.args.get("id")): return redirect("/factSearch") # Check if id exists
+    try: id = int(id) # Convert if to int
+    except: return redirect("/factSearch")
+    if len(rows := db.execute("SELECT * FROM factfiles WHERE id = ?", id)) != 1: return "Bad ID" # Check if id is in bounds 0 < id < max(id)+1
+    return rows[0]
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
@@ -58,4 +60,5 @@ def question():
     
     return redirect("/question") # Get new question
 
-app.run(host="0.0.0.0", port=8080)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
