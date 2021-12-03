@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1><b><u>{{ title }}</u></b></h1>
-    <h3>{{ topic }} ({{ subj }})</h3>
+    <h3>{{ topic | capitalize }} ({{ subj | capitalize }})</h3>
     <br><hr><br>
-    <p>{{ content }}</p>
+    <p>{{ content | safe }}</p>
 {% endblock %}
