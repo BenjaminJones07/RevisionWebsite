@@ -123,3 +123,11 @@ UPDATE questions SET reason = 'The German army was held back by the Belgian army
 SELECT * FROM questions;
 CREATE TABLE factfiles (id INTEGER, subj TEXT, topic TEXT, title TEXT, content TEXT, PRIMARY KEY (id));
 SELECT * FROM factfiles;
+DROP TABLE factfiles;
+CREATE TABLE factfiles (id INTEGER, subj TEXT, topic TEXT, title TEXT, content TEXT, PRIMARY KEY (id));
+DROP TABLE factfiles;
+CREATE TABLE factfiles (id INTEGER, subj TEXT, topic TEXT, title TEXT, filename TEXT, content TEXT, PRIMARY KEY (id));
+SELECT * FROM factfiles;
+UPDATE factfiles SET filename = 'waveEquations' WHERE id = 1;
+SELECT * FROM factfiles;
+DELETE FROM factfiles;

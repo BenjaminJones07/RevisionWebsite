@@ -1,8 +1,26 @@
 {% extends "layout.html" %}
 
+{% block head %}
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a {
+            color: #000000;
+        }
+        a:hover {
+            color: #262626;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1><b><u>{{ title }}</u></b></h1>
-    <h3>{{ topic | capitalize }} ({{ subj | capitalize }})</h3>
-    <br><hr><br>
-    <p>{{ content | safe }}</p>
+    <div style="text-align: left; margin-bottom: 30px;">
+        <h1><b><u>{{ title }}</u></b></h1>
+        <h3>{{ topic | capitalize }} ({{ subj | capitalize }})</h3>
+        <hr>
+        {{ content | safe }}
+    </div>
 {% endblock %}
