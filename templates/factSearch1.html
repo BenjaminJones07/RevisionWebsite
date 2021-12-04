@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <style>
+        .myLink {
+            color: white;
+            text-decoration: none;
+        }
+        .myLink:hover {
+            color: #8a8a8a;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Fact File Menu</h1>
+
+    <div id="accordion">
+        {% for k, v in subj.items() %}
+            <div class="card text-white bg-dark" style="margin: 10px;">
+                <div class="card-header" id="{{ k | title }}">
+                <h5 class="mb-0">
+                    <button class="btn btn-link myLink" data-toggle="collapse" data-target="#collapse{{ k | title }}" aria-expanded="false" aria-controls="collapse{{ k | title }}">
+                        {{ k | title }}
+                    </button>
+                </h5>
+                </div>
+            
+                <div id="collapse{{ k | title }}" class="collapse" aria-labelledby="{{ k | title }}" data-parent="#accordion">
+                <div class="card-body">
+                    {% for x in v %}
+                        <a href="/factSearch?topic={{ x }}" class="myLink">{{ x | title }}</a><br>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

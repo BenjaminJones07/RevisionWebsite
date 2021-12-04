@@ -29,7 +29,8 @@ def index():
 
 @app.route("/factSearch")
 def factsearch(): # Browse fact files
-    return "Nice"
+    if not (x := request.args.get("topic")) or x not in subjObj.getFTopicsArr(): return render_template("factSearch1.html", subj=subjObj.getRawTopicsArr())
+    return render_template("factSearch2.html", topic=x, files=db.execute("SELECT * FROM factfiles WHERE topic = ?", x))
 
 @app.route("/factFile")
 def factfile(): # Display fact file

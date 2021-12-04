@@ -1,4 +1,4 @@
-from re import sub, findall, M
+from re import sub, findall, M # Substitute RegEx, Find all matches RegEx, Multiline flag
 
 def markdown(s):
     s = "{0}\n\n".format(s)
@@ -9,6 +9,5 @@ def markdown(s):
     s = sub(r"^### (.*)$", r"<h3>\1</h3>", s, flags=M) # Heading 3
     s = sub(r"^#### (.*)$", r"<h4>\1</h4>", s, flags=M) # Heading 4
     s = sub(r"^!\[(.*)?]\((.*)?\)$", r"<br><br><img src='\2' alt='\1' class='center'><br>", s, flags=M) # Images
-    s = sub(r"\[((?:.)*?)\]\(((?:.)*?)\)", r"<a href='\2'>\1</a>", s) # Links
-    [s := s.replace(x, "<p>{0}</p>".format(x)) for x in findall(r"((?:.|\n)*?)\n\n", s) if "<ul" not in x] # Paragraph all else
+    s = sub(r"\[((?:.)*?)\]\(((?:.)*?)\)", r"<a href='\2'>\1</a>", s) # Links (MUST BE AFTER IMAGES TO ALLOW FOR INLINE LINKS)
     return sub(r"- (.*)", r"<li>\1</li>", s).strip("\n") # Add list elements
