@@ -17,12 +17,11 @@ Session(app)
 
 # Helpers
 empty = lambda x: x == "" or not x # Return True if variable is empty
-topicSet = lambda : TOPICS if not session.get("topics") else session["topics"] # If session topics empty, set to default (all topics)
 
 # Routes
 @app.route("/", methods=["GET", "POST"])
 def index():
-    session["topics"] = topicSet()
+    session["topics"] = session.get("topics", TOPICS)
     if request.method == "GET": return render_template("index.html", subj=subjObj.getRawTopicsArr()) # Render index page
     session["topics"] = list(dict.fromkeys([x for x in request.form.getlist("topics") if x in TOPICS])) # Remove duplicates and set session
     return redirect("/")
@@ -42,9 +41,10 @@ def factfile(): # Display fact file
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
-    session["topics"] = topicSet()
     if request.method == "GET":
-        row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session["topics"]), session.get("id", 0))) # Get random row
+        print(session.get("topics", TOPICS)) # Error Tanzania (Implement ACTUAL FIX, DONT JUST FIX THIS OCCURANCE!!!)
+        print(session.get("id", 0))
+        row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session.get("topics", TOPICS)), session.get("id", 0))) # Get random row
         session["id"], session["subject"] = row["id"], row["subj"]
         
         if row["type"] == 0: return render_template("multichoice.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
