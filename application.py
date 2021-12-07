@@ -1,8 +1,9 @@
 # Imports
 from flask import Flask, render_template, request, session, flash, redirect
-from Tools.subjects import SUBJECTS as loadSubj
 from Tools.questions import questionFuncts as qF, answerFuncts as aF
+from Tools.subjects import SUBJECTS as loadSubj
 from flask_session import Session
+from functools import wraps
 from cs50 import SQL
 import random
 
@@ -18,6 +19,13 @@ Session(app)
 # Helpers
 empty = lambda x: x == "" or not x # Return True if variable is empty
 
+def clearFlash(func):
+    @wraps(func)
+    def deco(*args, **kwargs):
+        session.pop('_flashes', None)
+        return func(*args, **kwargs)
+    return deco
+
 # Routes
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -27,11 +35,13 @@ def index():
     return redirect("/")
 
 @app.route("/factSearch")
+@clearFlash
 def factsearch(): # Browse fact files
     if not (x := request.args.get("topic")) or x not in subjObj.getFTopicsArr(): return render_template("factSearch1.html", subj=subjObj.getRawTopicsArr())
     return render_template("factSearch2.html", topic=x, files=db.execute("SELECT * FROM factfiles WHERE topic = ?", x))
 
 @app.route("/factFile")
+@clearFlash
 def factfile(): # Display fact file
     if not (id := request.args.get("id")): return redirect("/factSearch") # Check if id exists
     try: id = int(id) # Convert if to int
