@@ -50,9 +50,8 @@ def factfile(): # Display fact file
 @app.route("/question", methods=["GET", "POST"])
 def question():
     if request.method == "GET":
-        print(session.get("topics", TOPICS)) # Error Tanzania (Implement ACTUAL FIX, DONT JUST FIX THIS OCCURANCE!!!)
-        print(session.get("id", 0))
-        row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session.get("topics", TOPICS)), session.get("id", 0))) # Get random row
+        try: row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session.get("topics", TOPICS)), session.get("id", 0))) # Get random row
+        except: return redirect("/question") # Minor fix (Revome edge case fully before 1.3)
         session["id"], session["subject"] = row["id"], row["subj"]
         
         if row["type"] == 0: return render_template("multichoice.html", question=row["question"], answers=dict(zip(range(1, len(row["answers"].split(';'))+1), row["answers"].split(';')))) # Render question template
