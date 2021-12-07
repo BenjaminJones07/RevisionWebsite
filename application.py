@@ -34,10 +34,8 @@ def factsearch(): # Browse fact files
 
 @app.route("/factFile")
 def factfile(): # Display fact file
-    if not (id := request.args.get("id")): return redirect("/factSearch") # Check if id exists
-    try: id = int(id) # Convert if to int
-    except: return redirect("/factSearch")
-    if len(rows := db.execute("SELECT * FROM factfiles WHERE id = ?", id)) != 1: return "Bad ID" # Check if id exists
+    if not (id := request.args.get("id")) or not isinstance(id, int): return redirect("/factSearch") # Check if id exists
+    if len(rows := db.execute("SELECT * FROM factfiles WHERE id = ?", int(id))) != 1: return "Bad ID" # Check if id exists
     return render_template("factfile.html", **rows[0])
 
 @app.route("/question", methods=["GET", "POST"])
