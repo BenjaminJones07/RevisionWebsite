@@ -12,7 +12,7 @@
 
         {% block head %}{% endblock %}
     </head>
-    <body class="container bg-secondary" style="text-align: center; margin-top: 30px;">
+    <body class="bg-secondary" style="text-align: center; margin: 30px;">
         {% with flash = get_flashed_messages(with_categories=true) %}
             {% if flash %}
                 {% for c, f in flash %}

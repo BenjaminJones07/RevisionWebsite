@@ -1,37 +1,53 @@
 {% extends "layout.html" %}
 
+{% block head %}
+    <style>
+        #corner {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
+    <form action="/factSearch" method="GET">
+        <button type="submit" class="btn btn-primary" id="corner">Fact Files</button>
+    </form>
+
     <h1>Welcome to RevisionSite</h1>
-    <h6>Made by Ben Jones</h6>
-    <br><br>
-    <form method="GET" action="/question">
-        <button type="submit" class="btn btn-primary">Get Started!</button>
-    </form>
-    <br>
-    <hr>
-    <h3>Topics:</h3>
-    <br>
-    <form method="POST" action="/" style="text-align: left;">
-        {% for k, v in subj.items() %}
-            <div style="float: left; padding: 5px;">
-                <h5>{{ k | capitalize }}</h5>
-                {% for x in v %}
-                    <div class="form-check-inline">
-                        {% if x in session.topics %}
-                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}" checked>
-                        {% else %}
-                            <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}">
-                        {% endif %}
-                        <label class="form-check-label" for="box{{ x | capitalize }}">
-                            {{ x | capitalize }}
-                        </label>
-                    </div>
-                    <br>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <br style="clear: both;">
+        <h6>Made by Ben Jones</h6>
         <br><br>
-        <button type="submit" class="btn btn-primary">Set Topics</button>
-    </form>
+        <form method="GET" action="/question">
+            <button type="submit" class="btn btn-primary">Get Started!</button>
+        </form>
+        <br>
+        <hr>
+    <div class="container">
+        <h3>Topics:</h3>
+        <br>
+        <form method="POST" action="/" style="text-align: left;">
+            {% for k, v in subj.items() %}
+                <div style="float: left; padding: 5px;">
+                    <h5>{{ k | capitalize }}</h5>
+                    {% for x in v %}
+                        <div class="form-check-inline">
+                            {% if x in session.topics %}
+                                <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}" checked>
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" value="{{ x }}" name="topics" id="box{{ x | capitalize }}">
+                            {% endif %}
+                            <label class="form-check-label" for="box{{ x | capitalize }}">
+                                {{ x | capitalize }}
+                            </label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <br style="clear: both;">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Set Topics</button>
+        </form>
+    </div>
 {% endblock %}
