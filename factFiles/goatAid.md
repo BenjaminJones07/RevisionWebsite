@@ -11,5 +11,3 @@ Goat Aid was a bottom-up development project in Babati, Tanzania which ran from 
 - Goats require a lot of water to maintain
 - Goats can damage land
 - Veterinary bills can be expensives
-
-Source: School Geography Textbook

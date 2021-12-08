@@ -22,12 +22,13 @@ empty = lambda x: x == "" or not x # Return True if variable is empty
 def clearFlash(func):
     @wraps(func)
     def deco(*args, **kwargs):
-        session.pop('_flashes', None)
+        session['_flashes'] = None
         return func(*args, **kwargs)
     return deco
 
 # Routes
 @app.route("/", methods=["GET", "POST"])
+@clearFlash
 def index():
     session["topics"] = session.get("topics", TOPICS)
     if request.method == "GET": return render_template("index.html", subj=subjObj.getRawTopicsArr()) # Render index page
@@ -43,7 +44,7 @@ def factsearch(): # Browse fact files
 @app.route("/factFile")
 @clearFlash
 def factfile(): # Display fact file
-    if not (id := request.args.get("id")) or not isinstance(id, int): return redirect("/factSearch") # Check if id exists
+    if not (id := request.args.get("id")) or not id.isdigit(): return redirect("/factSearch") # Check if id exists
     if len(rows := db.execute("SELECT * FROM factfiles WHERE id = ?", int(id))) != 1: return "Bad ID" # Check if id exists
     return render_template("factfile.html", **rows[0])
 

@@ -14,5 +14,3 @@ The Tanzania-Canada Wheat Programme, which ran from 1968 to 1993, was a top-down
 - Most people in rural areas could not afford the wheat being produced
 - Lower biodiversity due to widespread farming of wheat
 - The $95 million had to be paid back
-
-Source: School Geography Textbook

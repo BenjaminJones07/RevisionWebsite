@@ -18,5 +18,3 @@ The area chosen for SAGCOT was chosen for a number of reasons, such as:
 - Major river systems
 - Generally rich alluvial soils
 - Large amounts of open land for farming
-
-Source: School Geography Textbook
