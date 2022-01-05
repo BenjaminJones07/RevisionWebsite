@@ -1,6 +1,4 @@
 from subjects import SUBJECTS as loadSubj
-from json import loads
-from cs50 import SQL
 
 SUBJECTS = loadSubj()
 sArr = SUBJECTS.getSubjectsArr()

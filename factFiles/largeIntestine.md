@@ -1,0 +1,1 @@
+The large intestine, also referred to as the colon, removes any remaining water from waste (which is mainly composed of indigestable cellulose) leaving the [Ileum](;linkfor "theIleum.md"). This semi-solid waste is called faeces and is stored in the rectum until it is expelled via the anus in a process called egestion.

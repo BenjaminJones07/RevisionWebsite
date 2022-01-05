@@ -1,10 +1,10 @@
 from subjects import subjAndTopicListInput
-from cs50 import SQL
+from sqlNone import SQLWrapper
 
-db, (subj, topic) = SQL("sqlite:///revWeb.db"), subjAndTopicListInput()
+db, (subj, topic) = SQLWrapper("sqlite:///revWeb.db"), subjAndTopicListInput()
 
 # Inputs
-question = "True or False? {0}".format(input("Statement: "))
+question = f"True or False? {input('Statement: ')}"
 isTrue = 1 if (x := input("True or False: ").title()) == "True" else 2
 if x not in ["True", "False"]: (print("Answer was not True or False"), quit())
 reason = input("Reason (optional): ")

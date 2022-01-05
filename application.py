@@ -2,24 +2,26 @@
 from flask import Flask, render_template, request, session, flash, redirect
 from Tools.questions import questionFuncts as qF, answerFuncts as aF
 from Tools.subjects import SUBJECTS as loadSubj
+from Tools.sqlNone import SQLWrapper
+from flask.wrappers import Response
 from flask_session import Session
 from functools import wraps
-from cs50 import SQL
 import random
 
-# Config
-subjObj = loadSubj()
-app, db, TOPICS = Flask(__name__), SQL("sqlite:///revWeb.db"), subjObj.getFTopicsArr()
+from typing import Callable, Union
 
+# Config
+app, db, TOPICS = Flask(__name__), SQLWrapper("sqlite:///revWeb.db"), (subjObj := loadSubj()).getFTopicsArr()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 Session(app)
 
 # Helpers
-empty = lambda x: x == "" or not x # Return True if variable is empty
+def empty(x: str) -> bool:
+    return x == "" or not x # Return True if variable is empty
 
-def clearFlash(func):
+def clearFlash(func: Callable) -> Callable:
     @wraps(func)
     def deco(*args, **kwargs):
         session['_flashes'] = None
@@ -29,7 +31,7 @@ def clearFlash(func):
 # Routes
 @app.route("/", methods=["GET", "POST"])
 @clearFlash
-def index():
+def index() -> Union[str, Response]:
     session["topics"] = session.get("topics", TOPICS)
     if request.method == "GET": return render_template("index.html", subj=subjObj.getRawTopicsArr()) # Render index page
     session["topics"] = list(dict.fromkeys([x for x in request.form.getlist("topics") if x in TOPICS])) # Remove duplicates and set session
@@ -37,19 +39,19 @@ def index():
 
 @app.route("/factSearch")
 @clearFlash
-def factsearch(): # Browse fact files
+def factsearch() -> str: # Browse fact files
     if not (x := request.args.get("topic")) or x not in subjObj.getFTopicsArr(): return render_template("factSearch1.html", subj=subjObj.getRawTopicsArr())
     return render_template("factSearch2.html", topic=x, files=db.execute("SELECT * FROM factfiles WHERE topic = ?", x))
 
 @app.route("/factFile")
 @clearFlash
-def factfile(): # Display fact file
+def factfile() -> Union[str, Response]: # Display fact file
     if not (id := request.args.get("id")) or not id.isdigit(): return redirect("/factSearch") # Check if id exists
     if len(rows := db.execute("SELECT * FROM factfiles WHERE id = ?", int(id))) != 1: return "Bad ID" # Check if id exists
     return render_template("factfile.html", **rows[0])
 
 @app.route("/question", methods=["GET", "POST"])
-def question():
+def question() -> Union[str, Response]:
     if request.method == "GET":
         try: row = random.choice(db.execute("SELECT id, question, answers, subj, type FROM questions WHERE topic = ? AND id != ?", random.choice(session.get("topics", TOPICS)), session.get("id", 0))) # Get random row
         except: return redirect("/question") # Minor fix (Revome edge case fully before 1.3)

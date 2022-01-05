@@ -1,16 +1,12 @@
-from cs50 import SQL
+from sqlNone import SQLWrapper
 import os
 
-database = input("Database file: ")
-if not os.path.isfile(database):
+if not os.path.isfile(database := input("Database file: ")):
     open(database, "w").close()
-db = SQL("sqlite:///{0}".format(database))
+db = SQLWrapper(f"sqlite:///{database}")
 
 while True:
-    cmd = input("{0}> ".format(database))
-    if cmd[0] == "&": continue
-    try:
-        print(db.execute(cmd))
-    except Exception as e:
-        print(e)
+    if (cmd := input(f"{database}> "))[0] == "&": continue
+    try: print(db.execute(cmd))
+    except Exception as e: print(e)
     open("sql_log.txt", "a").write(cmd + "\n")

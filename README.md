@@ -1,7 +1,11 @@
 # RevisionWebsite
-A general revision website for use in Year 9 subjects
+A general revision website for use in Year 9 subjects.
 
-## Current Subjects:
+Contains multiple question formats and a library of fact files / flash cards.
+
+---
+
+### Current Subjects (Installed by default):
 #### Biology:
  - Digestion
 
