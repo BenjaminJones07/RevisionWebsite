@@ -23,7 +23,8 @@
         ],
         "physics": [
             "waves",
-            "energy"
+            "energy",
+            "magnetism"
         ],
         "geography": [
             "tanzania"

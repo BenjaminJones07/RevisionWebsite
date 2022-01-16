@@ -48,7 +48,7 @@ class SUBJECTS():
             return False
 
     def addTopic(self, topic: str, subject: str) -> bool:
-        if self.inSubjects(subject) or self.isTopicInSubjects(topic, subject):
+        if not self.inSubjects(subject) or self.isTopicInSubjects(topic, subject):
             return False
         
         self.data["topics"][subject].append(topic)
